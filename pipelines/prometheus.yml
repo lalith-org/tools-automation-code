@@ -4,7 +4,7 @@ pipelines:
     group: terraform-setup-expense
     materials:
       git-da613e5:
-        git: https://github.com/lalith2211/expense-tools.git
+        git: https://github.com/lalith2211/tools-automation-code.git
         shallow_clone: false
         auto_update: true
         branch: main
