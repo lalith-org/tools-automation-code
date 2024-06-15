@@ -17,6 +17,14 @@ resource "aws_route53_record" "domain" {
   records = [aws_instance.vm.public_ip]
 }
 
+resource "aws_route53_record" "domain" {
+  zone_id = var.zone_id
+  name    = "${var.tool_name}-internal"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.vm.public_ip]
+}
+
 resource "aws_iam_role" "role" {
   name = "test_role"
 
