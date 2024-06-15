@@ -16,5 +16,5 @@ pipelines:
           jobs:
             terraform-apply:
               tasks:
-                - exec: {command: bash, arguments: ["ansible.sh","prometheus","prometheus.vsldo.online"], run_if: passed}
+                - exec: {command: bash, arguments: ["ansible.sh","prometheus","prometheus-internal.vsldo.online"], run_if: passed}
 #                - exec: {command: terraform, arguments: ["apply","-auto-approve"], run_if: passed}
