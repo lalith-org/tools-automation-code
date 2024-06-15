@@ -1,5 +1,5 @@
 - name: setting up prompt
-  ansible.builtin.shell: sudo set-prompt prometheus
+  ansible.builtin.shell: set-prompt prometheus
 
 - name: Un-archive file that needs to be downloaded (added in 2.0)
   ansible.builtin.unarchive:
