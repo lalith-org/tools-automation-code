@@ -17,7 +17,7 @@ resource "aws_route53_record" "domain" {
   records = [aws_instance.vm.public_ip]
 }
 
-resource "aws_route53_record" "domain" {
+resource "aws_route53_record" "domain-internal" {
   zone_id = var.zone_id
   name    = "${var.tool_name}-internal"
   type    = "A"
