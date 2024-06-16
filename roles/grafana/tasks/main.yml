@@ -13,6 +13,6 @@
 
 - name: Start service grafana, if not started
   ansible.builtin.service:
-    name: grafana
-    state: started
+    name: grafana-server
+    state: restarted
     enabled: yes
