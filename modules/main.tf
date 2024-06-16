@@ -30,7 +30,7 @@ resource "aws_route53_record" "domain-internal" {
   name    = "${var.tool_name}-internal"
   type    = "A"
   ttl     = 30
-  records = [aws_instance.vm.public_ip]
+  records = [aws_instance.vm.private_ip]
 }
 
 resource "aws_iam_role" "role" {
