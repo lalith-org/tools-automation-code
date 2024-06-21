@@ -1,0 +1,46 @@
+- name: Set Prompt
+  ansible.builtin.shell: set-prompt elk
+
+- name: place the repo file in system
+  ansible.builtin.template:
+    src: elasticsearch.repo
+    dest: /etc/yum.repos.d/elasticsearch.repo
+
+- name: install the elasticsearch package
+  ansible.builtin.dnf:
+    name: elasticsearch
+    state: installed
+
+- name: start service elasticsearch
+  ansible.builtin.systemd:
+    name: elasticsearch
+    state: started
+    enabled: yes
+
+- name: install the kibana package
+  ansible.builtin.dnf:
+    name: kibana
+    state: installed
+
+- name: start service kibana
+  ansible.builtin.systemd:
+    name: kibana
+    state: started
+    enabled: yes
+
+- name: uncommenting the line to expose port for kibana
+  ansible.builtin.lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: '^#server.port: 5601'
+    line: "server.port: 5601"
+
+- name: update server.host in kibana
+  ansible.builtin.lineinfile:
+    path: /etc/kibana/kibana.yml
+    regexp: '^#server.host: localhost'
+    line: "server.host: 0.0.0.0"
+
+- name: restart service kibana
+  ansible.builtin.systemd:
+    name: kibana
+    state: restarted
