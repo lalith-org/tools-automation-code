@@ -24,6 +24,11 @@ variable "tools" {
       instance_type = "t3.small"
       policy_resource_list = []
     }
+
+    sonar = {
+      instance_type = "t3.large"
+      policy_resource_list = []
+    }
   }
 }
 
