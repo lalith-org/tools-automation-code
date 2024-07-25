@@ -1,0 +1,20 @@
+format_version: 10
+pipelines:
+  ci-server:
+    group: ansible-tools
+    materials:
+      git-da613e5:
+        git: https://github.com/lalith2211/tools-automation-code.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - Ansible:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            terraform-apply:
+              tasks:
+                - exec: {command: bash, arguments: ["ansible.sh","ci-server","ci-server-internal.vsldo.online"], run_if: passed}
+#                - exec: {command: terraform, arguments: ["apply","-auto-approve"], run_if: passed}

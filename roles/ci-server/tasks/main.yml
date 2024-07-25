@@ -1,0 +1,15 @@
+- name: Set Prompt
+  ansible.builtin.shell: set-prompt ci-server
+
+- name: Create runner directory
+  ansible.builtin.file:
+    path: /home/ec2-user/github-runner
+    state: directory
+  become_user: ec2-user
+
+- name: Download Runner
+  ansible.builtin.unarchive:
+    src: https://github.com/actions/runner/releases/download/v2.315.0/actions-runner-osx-x64-2.315.0.tar.gz
+    path: /home/ec2-user/github-runner
+    remote_src: yes
+  become_user: ec2-user
