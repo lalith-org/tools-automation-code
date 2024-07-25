@@ -9,7 +9,16 @@
 
 - name: Download Runner
   ansible.builtin.unarchive:
-    src: https://github.com/actions/runner/releases/download/v2.315.0/actions-runner-osx-x64-2.315.0.tar.gz
-    path: /home/ec2-user/github-runner
+    src: https://github.com/actions/runner/releases/download/v2.315.0/actions-runner-linux-x64-2.315.0.tar.gz
+    dest: /home/ec2-user/github-runner
     remote_src: yes
+  become_user: ec2-user
+
+- name: Install Dependencies
+  ansible.builtin.shell: /home/ec2-user/github-runner/bin/installdependencies.sh
+
+- name: Install Runner
+  ansible.builtin.shell: ./config.sh --unattended --url https://github.com/lalith2211 --token {{secrets.GITHUB_RUNNER_TOKEN}}
+  args:
+    chdir: /home/ec2-user/github-runner
   become_user: ec2-user
