@@ -17,8 +17,39 @@
 - name: Install Dependencies
   ansible.builtin.shell: /home/ec2-user/github-runner/bin/installdependencies.sh
 
+- name: Start Runner
+  ansible.builtin.shell: ./svc.sh uninstall
+  args:
+    chdir: /home/ec2-user/github-runner
+
 - name: Install Runner
-  ansible.builtin.shell: ./config.sh --unattended --url https://github.com/lalith2211 --token {{secrets.GITHUB_RUNNER_TOKEN}}
+  ansible.builtin.shell: ./config.sh remove --token {{secrets.GITHUB_RUNNER_TOKEN}}; ./config.sh --unattended --replace --url https://github.com/lalith-org --token {{secrets.GITHUB_RUNNER_TOKEN}}
   args:
     chdir: /home/ec2-user/github-runner
   become_user: ec2-user
+
+- name: Start Runner
+  ansible.builtin.shell: ./svc.sh install; ./svc.sh start
+  args:
+    chdir: /home/ec2-user/github-runner
+
+- name: Disable default NodeJS Version Module
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: Enable NodeJS module for V20
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: Install NodeJS
+  ansible.builtin.dnf:
+    name: nodejs
+    state: installed
+
+- name: Install Java
+  ansible.builtin.dnf:
+    name: java-17-openjdk
+    state: installed
+
+- name: Download Sonarqube
+  ansible.builtin.unarchive:
+    src: https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+    dest: /opt

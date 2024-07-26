@@ -1,4 +1,4 @@
-- name: set prompt
+- name: Set Prompt
   ansible.builtin.shell: set-prompt sonarqube
 
 - name: Add sonarqube user
