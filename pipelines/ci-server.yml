@@ -18,5 +18,5 @@ pipelines:
           jobs:
             terraform-apply:
               tasks:
-                - exec: {command: ansible-playbook, arguments: [ "-i", "ci-server-internal.rdevops6a.online,", "tools.yml", "-e", "tool_name=ci-server", "-e", "ansible_user=ec2-user", "-e", "ansible_password=DevOps321" ], run_if: passed}
+                - exec: {command: ansible-playbook, arguments: [ "-i", "ci-server-internal.vsldo.online,", "tools.yml", "-e", "tool_name=ci-server", "-e", "ansible_user=ec2-user", "-e", "ansible_password=DevOps321" ], run_if: passed}
 #                - exec: {command: terraform, arguments: ["apply","-auto-approve"], run_if: passed}
