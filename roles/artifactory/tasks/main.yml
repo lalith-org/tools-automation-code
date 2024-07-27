@@ -1,12 +1,12 @@
-- name: set prompt
+- name: Set Prompt
   ansible.builtin.shell: set-prompt artifactory
 
-- name: copy artifactory template
+- name: Copy repo file
   ansible.builtin.template:
-    src: artifactory.repo
+    src: jfrog.repo
     dest: /etc/yum.repos.d/jfrog-artifactory-rpms.repo
 
-- name: install artifactory package
+- name: Install Jfrog
   ansible.builtin.dnf:
     name: jfrog-artifactory-oss
     state: installed
