@@ -8,7 +8,7 @@
   ansible.builtin.unarchive:
     src: https://releases.jfrog.io/artifactory/bintray-artifactory/org/artifactory/oss/jfrog-artifactory-oss/7.71.9/jfrog-artifactory-oss-7.71.9-linux.tar.gz
     dest: /opt
-    remote_src: ture
+    remote_src: yes
 
 - name: Create a user 'artifactory' with a home directory
   ansible.builtin.user:
