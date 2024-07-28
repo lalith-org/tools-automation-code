@@ -1,19 +1,29 @@
 - name: Set Prompt
   ansible.builtin.shell: set-prompt artifactory
 
-- name: Copy repo file
-  ansible.builtin.template:
-    src: jfrog.repo
-    dest: /etc/yum.repos.d/jfrog-artifactory-rpms.repo
+- name: download the setup file for artifactory
+  ansible.builtin.shell: curl -L https://releases.jfrog.io/artifactory/bintray-artifactory/org/artifactory/oss/jfrog-artifactory-oss/7.71.9/jfrog-artifactory-oss-7.71.9-linux.tar.gz -o /opt/jfrog-artifactory-oss-7.71.9-linux.tar.gz
 
-- name: Install Jfrog
-  ansible.builtin.dnf:
-    name: jfrog-artifactory-oss
-    state: installed
-    disable_gpg_check: true
+- name: unarchive the downloaded file
+  ansible:builtin.unarchive:
+    src: /opt/jfrog-artifactory-oss-7.71.9-linux.tar.gz
+    dest: /opt
 
-- name: Start Artifactory
-  ansible.builtin.systemd_service:
+- name: Create a user 'artifactory' with a home directory
+  ansible.builtin.user:
     name: artifactory
+    create_home: yes
+
+- name: changing the ownership of the files
+  ansible.builtin.shell: chown -R artifactory:artifactory /opt/artifactory-oss-7.71.9
+
+- name: placing the artifactory service file in service folder
+  ansible.builtin.template:
+    src: artifactory.service
+    dest: /etc/systemd/system/artifactory.service
+
+- name: starting the artifactory service
+  ansible.builtin.systemd_service:
     state: started
-    enabled: yes
+    name: artifactory
+    daemon_reexec: true
