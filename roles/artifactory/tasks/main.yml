@@ -5,7 +5,7 @@
   ansible.builtin.shell: curl -L https://releases.jfrog.io/artifactory/bintray-artifactory/org/artifactory/oss/jfrog-artifactory-oss/7.71.9/jfrog-artifactory-oss-7.71.9-linux.tar.gz -o /opt/jfrog-artifactory-oss-7.71.9-linux.tar.gz
 
 - name: unarchive the downloaded file
-  ansible:builtin.unarchive:
+  ansible.builtin.unarchive:
     src: /opt/jfrog-artifactory-oss-7.71.9-linux.tar.gz
     dest: /opt
 
