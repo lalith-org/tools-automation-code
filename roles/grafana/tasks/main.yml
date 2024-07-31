@@ -11,6 +11,35 @@
     name: grafana
     state: installed
 
+- name: Copy Datasource
+  ansible.builtin.template:
+    src: prom-datasource.yml
+    dest: /etc/grafana/provisioning/datasources/prom.yml
+
+- name: Copy template
+  ansible.builtin.copy:
+    src: node-exporter.json
+    dest: /tmp/node-exporter.json
+
+- name: Create a folder
+  community.grafana.grafana_folder:
+    url: http://localhost:3000
+    grafana_user: "admin"
+    grafana_password: "admin123"
+    title: "ProjectDashboards"
+    state: present
+
+- name: Import Grafana dashboard Node Exporter
+  community.grafana.grafana_dashboard:
+    grafana_url: http://localhost:3000
+    grafana_user: "admin"
+    grafana_password: "admin123"
+    state: present
+    commit_message: Updated by ansible
+    overwrite: true
+    path: /tmp/node-exporter.json
+    folder: ProjectDashboards
+
 - name: Start service grafana, if not started
   ansible.builtin.service:
     name: grafana-server
