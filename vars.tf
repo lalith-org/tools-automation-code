@@ -1,24 +1,24 @@
 variable "tools" {
   default = {
-#    prometheus = {
-#      instance_type = "t3.micro"
-#      policy_resource_list = ["ec2:DescribeInstances"]
-#    }
-#
-#    grafana = {
-#      instance_type = "t3.micro"
-#      policy_resource_list = []
-#    }
+    prometheus = {
+      instance_type = "t3.micro"
+      policy_resource_list = ["ec2:DescribeInstances"]
+    }
+
+    grafana = {
+      instance_type = "t3.micro"
+      policy_resource_list = []
+    }
 
     vault = {
       instance_type = "t3.micro"
       policy_resource_list = []
     }
 
-#    elk = {
-#      instance_type = "r7i.large"
-#      policy_resource_list = []
-#    }
+    elk = {
+      instance_type = "r6i.large" #"r7i.large"
+      policy_resource_list = []
+    }
 
     ci-server = {
       instance_type = "t3.small"
