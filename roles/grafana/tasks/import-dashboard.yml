@@ -1,0 +1,15 @@
+- name: Copy template
+  ansible.builtin.copy:
+    src: node-exporter.json
+    dest: /tmp/node-exporter.json
+
+- name: Import Grafana dashboard Node Exporter
+  community.grafana.grafana_dashboard:
+    grafana_url: http://localhost:3000
+    grafana_user: "admin"
+    grafana_password: "admin123"
+    state: present
+    commit_message: Updated by ansible
+    overwrite: true
+    path: /tmp/node-exporter.json
+    folder: ProjectDashboards

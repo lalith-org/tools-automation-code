@@ -21,7 +21,7 @@ resource "aws_route53_record" "domain" {
   zone_id = var.zone_id
   name    = var.tool_name
   type    = "A"
-  ttl     = 30
+  ttl     = 3
   records = [aws_instance.vm.public_ip]
 }
 
