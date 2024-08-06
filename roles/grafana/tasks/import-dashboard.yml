@@ -1,6 +1,6 @@
 - name: Copy template
   ansible.builtin.copy:
-    src: node-exporter.json
+    src: {{item}}.json
     dest: /tmp/{{item}}.json
 
 - name: Import Grafana dashboard Node Exporter
