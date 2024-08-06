@@ -11,5 +11,5 @@
     state: present
     commit_message: Updated by ansible
     overwrite: true
-    path: /tmp/node-exporter.json
+    path: /tmp/{{item}}.json
     folder: ProjectDashboards
