@@ -1,0 +1,22 @@
+format_version: 10
+pipelines:
+  jenkins:
+    group: ansible-tools
+    materials:
+      git-da613e5:
+        git: https://github.com/lalith2211/tools-automation-code.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    secure_variables:
+      vault_token: AES:N7/XN5P4XpSAf3Qyr2sf+Q==:GMTsMI47aNszIcvo4j12jjnY5MPySqdEuntHNwb2EMU=
+    stages:
+      - DEV:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            terraform-apply:
+              tasks:
+                - exec: {command: bash, arguments: ["ansible.sh","jenkins","jenkins-internal.vsldo.online"], run_if: passed}
+#                - exec: {command: terraform, arguments: ["apply","-auto-approve"], run_if: passed}
