@@ -23,7 +23,7 @@
 <jenkins.branch.BranchSource>
 <source class="jenkins.plugins.git.GitSCMSource" plugin="git@5.2.2">
 <id>15576e2b-aec8-4493-8c4d-94a05ce4a417</id>
-<remote>https://github.com/raghudevopsb78/expense-{{item}}.git</remote>
+<remote>https://github.com/lalith-org/expense-{{item}}.git</remote>
 <credentialsId></credentialsId>
 <traits>
 <jenkins.plugins.git.traits.BranchDiscoveryTrait/>
