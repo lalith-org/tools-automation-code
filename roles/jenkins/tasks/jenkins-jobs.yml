@@ -1,7 +1,7 @@
 - name: Install python-jenkins
   ansible.builtin.pip:
     name: python-jenkins
-    executable: pip3.9
+    executable: pip3.11
 
 - name: Create Job xml file
   ansible.builtin.template:
@@ -10,10 +10,12 @@
   loop:
     - frontend
     - backend
+  delegate_to: localhost
+  become: false
 
 - name: Create Jobs
   community.general.jenkins_job:
-    config: /tmp/{{item}}.xml
+    config: "{{ lookup('file', '/tmp/{{item}}.xml') }}"
     name: "{{item}}"
     password: "{{secrets.jenkins_password}}"
     url: http://jenkins-internal.vsldo.online:8080
