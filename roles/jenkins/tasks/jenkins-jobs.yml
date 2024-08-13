@@ -18,5 +18,5 @@
     config: /tmp/{{item}}.xml
     name: "{{item}}"
     password: {{secrets.jenkins_password}}
-    url: http://localhost:8080
+    url: http://jenkins-internal.vsldo.online:8080
     user: {{secrets.jenkins_user}}
