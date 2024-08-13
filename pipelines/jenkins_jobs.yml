@@ -18,6 +18,4 @@ pipelines:
           jobs:
             terraform-apply:
               tasks:
-#                - exec: {command: bash, arguments: ["ansible.sh","jenkins","jenkins-internal.vsldo.online","-e","jenkins_job=false"], run_if: passed}
-#                - exec: {command: terraform, arguments: ["apply","-auto-approve"], run_if: passed}
-                - exec: {command: ansible-playbook, arguments: [ "-i", "jenkins-internal.vsldo.online,", "tools.yml", "-e", "tool_name=jenkins", "-e", "ansible_user=ec2-user", "-e", "ansible_password=DevOps321", "-e", "jenkins_setup=true" ], run_if: passed}
+                - exec: {command: ansible-playbook, arguments: [ "-i", "jenkins-internal.vsldo.online,", "tools.yml", "-e", "tool_name=jenkins", "-e", "ansible_user=ec2-user", "-e", "ansible_password=DevOps321", "-e", "jenkins_jobs=true" ], run_if: passed}
