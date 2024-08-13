@@ -5,18 +5,19 @@
 
 - name: Create Job xml file
   ansible.builtin.template:
-    src: jobs/mbranch.xml
+    src: jobs/pipeline.xml
     dest: /tmp/{{item}}.xml
   loop:
     - frontend
     - backend
-  delegate_to: localhost
-  become: false
 
-- name: Create a jenkins job using basic authentication
+- name: Create Jobs
   community.general.jenkins_job:
     config: /tmp/{{item}}.xml
     name: "{{item}}"
     password: "{{secrets.jenkins_password}}"
     url: http://jenkins-internal.vsldo.online:8080
     user: "{{secrets.jenkins_user}}"
+  loop:
+    - frontend
+    - backend
