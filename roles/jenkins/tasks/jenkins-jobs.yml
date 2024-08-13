@@ -17,6 +17,6 @@
   community.general.jenkins_job:
     config: /tmp/{{item}}.xml
     name: "{{item}}"
-    password: {{secrets.jenkins_password}}
+    password: "{{secrets.jenkins_password}}"
     url: http://jenkins-internal.vsldo.online:8080
-    user: {{secrets.jenkins_user}}
+    user: "{{secrets.jenkins_user}}"
