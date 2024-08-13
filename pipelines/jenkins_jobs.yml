@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  jenkins:
+  jenkins_jobs:
     group: ansible-tools
     materials:
       git-da613e5:
